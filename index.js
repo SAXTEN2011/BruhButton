@@ -26,11 +26,10 @@ function dataURItoBlob(dataURI) {
 
 
 document.getElementById("start").addEventListener('click', function () {
-    alert('click')
     navigator.mediaDevices.getUserMedia({
             audio: true
         }).then(stream => {
-            alert('getusermedia')
+            alert('Pressing OK will begin the one second recording')
             const mediaRecorder = new MediaRecorder(stream);
             mediaRecorder.start();
             const audioChunks = [];
