@@ -2,23 +2,44 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Encoding Audio in Url</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Encoding Audio in Url</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <script src="./lzma_worker.js"></script>
+    <script src="./compress.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyADKIvIPP7UblLs2detPKyV3yNlM4JoaX8",
+            authDomain: "physicsgroup-a328f.firebaseapp.com",
+            databaseURL: "https://physicsgroup-a328f.firebaseio.com",
+            projectId: "physicsgroup-a328f",
+            storageBucket: "physicsgroup-a328f.appspot.com",
+            messagingSenderId: "1080517349334"
+        };
+        firebase.initializeApp(config);
+    </script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        
-        <button id="start">Start</button>
-        <h1 id='indicator'>Not Recording</h1>
 
-        <script src="index.js" async defer></script>
-    </body>
+    <button id="start">Start</button>
+    <h1 id='indicator'>Not Recording</h1>
+
+    <script src="index.js" async defer></script>
+</body>
+
 </html>
