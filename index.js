@@ -31,56 +31,61 @@ function dataURItoBlob(dataURI) {
 
 
 document.getElementById("start").addEventListener('click', function () {
-    navigator.mediaDevices.getUserMedia({
-            audio: true
-        })
-        .then(stream => {
-            const mediaRecorder = new MediaRecorder(stream);
-            mediaRecorder.start();
-            document.getElementById('indicator').innerHTML = "Recording"
 
-            const audioChunks = [];
-            mediaRecorder.addEventListener("dataavailable", event => {
-                audioChunks.push(event.data);
-            });
-
-            mediaRecorder.addEventListener("stop", () => {
-                console.log(audioChunks)
-                const audioBlob = new Blob(audioChunks);
-                const audioUrl = URL.createObjectURL(audioBlob);
-                const audio = new Audio(audioUrl);
-                audio.play();
-                // console.log(audioBlob.data());
-                var reader = new FileReader();
-                reader.addEventListener("loadend", function () {
-
-                    console.log(reader.result)
-
-                    let newDbEntry = firebase.database().ref('sounds').push();
-                    newDbEntry.set({
-                        uri: reader.result
-                    })
-
-                    console.log(newDbEntry.key)
-
-
-                    let linkString = window.location.origin + (window.location.pathname.indexOf(".html") === -1 ? window.location.pathname : "/")  + `button.html?data=` + newDbEntry.key + ``;
-
-                    document.body.innerHTML += "<h2>Give this link to your personal button: <a href='" + linkString + "'>" + linkString + "</a></h2>"
-                });
-                reader.readAsDataURL(audioBlob)
-                // audio2.play();
-                // audio.play();
-            });
-
-            setTimeout(() => {
-                mediaRecorder.stop();
-                document.getElementById('indicator').innerHTML = "Not Recording"
-            }, 1000);
-        });
-
+    // buttonSubmit();
 
 });
+
+
+function buttonSubmit(){
+    navigator.mediaDevices.getUserMedia({
+        audio: true
+    })
+    .then(stream => {
+        const mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.start();
+        document.getElementById('indicator').innerHTML = "Recording"
+
+        const audioChunks = [];
+        mediaRecorder.addEventListener("dataavailable", event => {
+            audioChunks.push(event.data);
+        });
+
+        mediaRecorder.addEventListener("stop", () => {
+            console.log(audioChunks)
+            const audioBlob = new Blob(audioChunks);
+            const audioUrl = URL.createObjectURL(audioBlob);
+            const audio = new Audio(audioUrl);
+            audio.play();
+            // console.log(audioBlob.data());
+            var reader = new FileReader();
+            reader.addEventListener("loadend", function () {
+
+                console.log(reader.result)
+
+                let newDbEntry = firebase.database().ref('sounds').push();
+                newDbEntry.set({
+                    uri: reader.result
+                })
+
+                console.log(newDbEntry.key)
+
+
+                let linkString = window.location.origin + (window.location.pathname.indexOf(".html") === -1 ? window.location.pathname : "/")  + `button.html?data=` + newDbEntry.key + ``;
+
+                document.body.innerHTML += "<h2>Give this link to your personal button: <a href='" + linkString + "'>" + linkString + "</a></h2>"
+            });
+            reader.readAsDataURL(audioBlob)
+            // audio2.play();
+            // audio.play();
+        });
+
+        setTimeout(() => {
+            mediaRecorder.stop();
+            document.getElementById('indicator').innerHTML = "Not Recording"
+        }, 1000);
+    });
+}
 
 
 // window.onerror = function (msg, url, linenumber) {
