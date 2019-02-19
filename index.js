@@ -64,7 +64,7 @@ document.getElementById("start").addEventListener('click', function () {
                     console.log(newDbEntry.key)
 
 
-                    let linkString = window.location.origin + window.location.pathname + `button.html?data=` + newDbEntry.key + ``;
+                    let linkString = window.location.origin + (window.location.pathname.indexOf(".html") === -1 ? window.location.pathname : "/")  + `button.html?data=` + newDbEntry.key + ``;
 
                     document.body.innerHTML += "<h2>Give this link to your personal button: <a href='" + linkString + "'>" + linkString + "</a></h2>"
                 });
